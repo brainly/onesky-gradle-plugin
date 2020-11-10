@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- Name of the application -->
+    <string name="app_name">Nosdevoirs.fr</string>
+    <!-- Name of the shortcut for memory leaks info -->
+    <!-- error informing the user that he/she doesnt have ticket -->
+    <string name="error_task_view_no_ticket">Désolé, une erreur est survenue. Réessaye plus tard.
+    </string>
+    <!-- error informing the user that the question he opened was deleted -->
+    <string name="error_task_view_missing_task">La question a été supprimée</string>
+</resources>
