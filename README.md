@@ -4,14 +4,14 @@ Plugin for downloading and uploading translations from <a href="https://www.ones
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-0.5.0-blue.svg">
+    <img src="https://img.shields.io/badge/version-0.5.1-blue.svg">
 </p>
 
 ## Installation
 
 ```kotlin
 plugins {
-    id("co.brainly.onesky") version "0.5.0"
+    id("co.brainly.onesky") version "0.5.1"
 }
 
 // ...
@@ -29,7 +29,7 @@ configure<OneSkyPluginExtension> {
 
 | Task                 | Description                                                              |
 |----------------------|--------------------------------------------------------------------------|
-| **translationsProgress** | Displays progress translations for all languages                      |
+| **translationsProgress** | Displays translations progress for all languages                      |
 | **downloadTranslations** | Downloads all of available translations (including not finished ones) |
 | uploadBaseTranslation (TODO) | Uploads base translation files |
 
@@ -37,11 +37,11 @@ configure<OneSkyPluginExtension> {
 
 See the release instructions [here](HOW_TO_RELEASE.md).
 
-## Building
+## Development
 
 ```bash
 # publish locally
-./gradlew clean plugin:publishToMavenLocal
+./gradlew clean plugin:build plugin:publishToMavenLocal
 
 # run a sample
 ./gradlew sample:translationsProgress --refresh-dependencies
