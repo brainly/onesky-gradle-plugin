@@ -15,10 +15,15 @@ gradlePlugin {
         register("onesky-gradle") {
             id = "co.brainly.onesky"
             displayName = "OneSky Gradle Plugin"
-            description = "Sync your translations files with OneSky"
             implementationClass = "co.brainly.onesky.OneSkyPlugin"
         }
     }
+}
+
+pluginBundle {
+    description = "Sync your translations files with OneSky"
+    website = "https://brainly.com"
+    vcsUrl = "https://github.com/brainly/onesky-gradle-plugin"
 }
 
 publishing {
@@ -53,5 +58,17 @@ dependencies {
 
     testImplementation("junit:junit:4.12")
     testImplementation("com.squareup.okhttp3:mockwebserver:$okHttp")
+}
 
+publishing {
+    repositories {
+        maven {
+            name = "BrainlyMaven"
+            setUrl("https://brainly-maven.appspot.com")
+            credentials {
+                username = findProperty("BRAINLY_MAVEN_ADMIN_USER").toString()
+                password = findProperty("BRAINLY_MAVEN_ADMIN_PASSWORD").toString()
+            }
+        }
+    }
 }
