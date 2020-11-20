@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "co.brainly"
-version = "0.5.0"
+version = "0.5.1"
 
 gradlePlugin {
     plugins {
@@ -46,9 +46,9 @@ repositories {
 dependencies {
     compileOnly(gradleApi())
 
-    val okHttp = "4.9.0"
+    val okHttp = "4.8.1"
     implementation("com.squareup.okhttp3:okhttp:$okHttp")
-    val moshi = "1.11.0"
+    val moshi = "1.9.3"
     implementation("com.squareup.moshi:moshi:$moshi")
     implementation("com.squareup.moshi:moshi-kotlin:$moshi")
 

@@ -20,7 +20,7 @@ class OneSkyApiClient(
 ) {
 
     private val moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
+        .add(KotlinJsonAdapterFactory())
         .build()
 
     private val okHttpClient = OkHttpClient.Builder()
