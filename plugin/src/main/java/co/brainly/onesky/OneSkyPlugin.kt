@@ -5,6 +5,12 @@ import co.brainly.onesky.task.TranslationsProgressTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+/**
+ * @property apiKey API key found on OneSky account's settings page
+ * @property apiSecret API secret found on OneSky account's settings page
+ * @property projectId OneSky's project id for syncing files with
+ * @property sourceStringFiles list of files to be synced with OneSky
+ */
 open class OneSkyPluginExtension(
     var verbose: Boolean = false,
     var apiKey: String = "",

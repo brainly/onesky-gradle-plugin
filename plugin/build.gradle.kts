@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "co.brainly"
-version = "1.1-SNAPSHOT"
+version = "0.5.0"
 
 gradlePlugin {
     plugins {
