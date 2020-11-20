@@ -2,11 +2,12 @@ package co.brainly.onesky.client
 
 import co.brainly.onesky.util.SystemTimeProvider
 import co.brainly.onesky.util.TimeProvider
-import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.*
+import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okio.ByteString.Companion.encodeUtf8
 import java.util.concurrent.TimeUnit
 
@@ -93,4 +94,3 @@ class OneSkyApiClient(
         return this
     }
 }
-

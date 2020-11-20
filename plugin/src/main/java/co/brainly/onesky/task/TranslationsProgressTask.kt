@@ -3,7 +3,8 @@ package co.brainly.onesky.task
 import co.brainly.onesky.OneSkyPluginExtension
 import co.brainly.onesky.client.LanguageListResponse
 import co.brainly.onesky.client.OneSkyApiClient
-import com.jakewharton.picnic.*
+import com.jakewharton.picnic.renderText
+import com.jakewharton.picnic.table
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskExecutionException
@@ -70,4 +71,3 @@ open class TranslationsProgressTask @Inject constructor(
 }
 
 private class LanguageProgress(val name: String, val progress: Float)
-

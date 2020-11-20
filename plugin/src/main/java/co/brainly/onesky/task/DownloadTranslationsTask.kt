@@ -85,8 +85,10 @@ open class DownloadTranslationsTask @Inject constructor(
         filename: String,
         throwable: Throwable
     ) {
-        logger.warn("Download failed for ${language.english_name} - ${language.code} ($filename), " +
-                "reason: ${throwable.message}")
+        logger.warn(
+            "Download failed for ${language.english_name} - ${language.code} ($filename), " +
+                "reason: ${throwable.message}"
+        )
     }
 
     private fun reportFailure(throwable: Throwable) {
@@ -95,5 +97,4 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private val Project.androidResDir: File
         get() = projectDir.resolve("src/main/res")
-
 }

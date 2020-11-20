@@ -98,5 +98,4 @@ class OneSkyApiClientTest {
             translationResult.getOrNull()
         )
     }
-
 }

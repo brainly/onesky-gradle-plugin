@@ -17,7 +17,7 @@ sealed class Result<T> {
         is Success -> value
     }
 
-    fun errorOrNull(): Throwable? = when(this) {
+    fun errorOrNull(): Throwable? = when (this) {
         is Failure -> throwable
         is Success -> null
     }
