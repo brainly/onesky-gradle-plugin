@@ -9,6 +9,7 @@ Plugin for downloading and uploading translations from <a href="https://www.ones
 
 ## Installation
 
+**app/build.gradle.kts**
 ```kotlin
 plugins {
     id("co.brainly.onesky") version "0.5.1"
