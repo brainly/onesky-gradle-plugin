@@ -31,3 +31,18 @@ configure<OneSkyPluginExtension> {
 |----------------------|--------------------------------------------------------------------------|
 | **translationsProgress** | Displays progress translations for all languages                      |
 | **downloadTranslations** | Downloads all of available translations (including not finished ones) |
+| uploadBaseTranslation (TODO) | Uploads base translation files |
+
+## Releasing
+
+See the release instructions [here](HOW_TO_RELEASE.md).
+
+## Building
+
+```bash
+# publish locally
+./gradlew clean plugin:publishToMavenLocal
+
+# run a sample
+./gradlew sample:translationsProgress --refresh-dependencies
+```
