@@ -71,7 +71,7 @@ open class DownloadTranslationsTask @Inject constructor(
             return
         }
 
-        val languageDir = project.androidResDir.resolve("values-${language.code}")
+        val languageDir = project.androidResDir.resolve("values-${language.androidDirName}")
         languageDir.mkdirs()
 
         val translationFile = File(languageDir, filename)
@@ -94,6 +94,15 @@ open class DownloadTranslationsTask @Inject constructor(
     private fun reportFailure(throwable: Throwable) {
         throw TaskExecutionException(this, throwable)
     }
+
+    private val Language.androidDirName: String
+        get() {
+            if (code.contains("-")) {
+                val (locale, region) = code.split("-")
+                return "$locale-r$region"
+            }
+            return code
+        }
 
     private val Project.androidResDir: File
         get() = projectDir.resolve("src/main/res")
