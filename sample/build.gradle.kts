@@ -3,7 +3,7 @@ import co.brainly.onesky.OneSkyPluginExtension
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("co.brainly.onesky") version "1.1-SNAPSHOT"
+    id("co.brainly.onesky") version "1.0.0"
 }
 
 android {
