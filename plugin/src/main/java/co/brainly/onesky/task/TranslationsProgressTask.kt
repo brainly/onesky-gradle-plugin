@@ -3,7 +3,6 @@ package co.brainly.onesky.task
 import co.brainly.onesky.OneSkyPluginExtension
 import co.brainly.onesky.client.LanguageListResponse
 import co.brainly.onesky.client.OneSkyApiClient
-import co.brainly.onesky.util.Constants
 import com.jakewharton.picnic.renderText
 import com.jakewharton.picnic.table
 import org.gradle.api.DefaultTask
@@ -21,14 +20,6 @@ open class TranslationsProgressTask @Inject constructor(
         extension.apiKey,
         extension.apiSecret
     )
-
-    override fun getDescription(): String {
-        return "Displays current progress from OneSky, skips already finished translations"
-    }
-
-    override fun getGroup(): String {
-        return Constants.TASK_GROUP
-    }
 
     @TaskAction
     fun run() {

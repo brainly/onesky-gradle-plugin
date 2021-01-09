@@ -110,7 +110,8 @@ class OneSkyApiClientTest {
         val request = server.takeRequest()
 
         assertEquals(
-            "/projects/41994/files?api_key=my-api-key&timestamp=12&dev_hash=28dac32cc9ee8ab264d35087653be23e&file_format=ANDROID_XML&is_keeping_all_strings=true",
+            "/projects/41994/files?api_key=my-api-key&timestamp=12" +
+                "&dev_hash=28dac32cc9ee8ab264d35087653be23e&file_format=ANDROID_XML&is_keeping_all_strings=true",
             request.path
         )
 
@@ -129,7 +130,10 @@ class OneSkyApiClientTest {
             Hello OneSky Gradle Plugin
             --onesky-gradle-plugin-file--
 
-            """.trimIndent().replace("\n", "\r\n"), // to avoid conflicts with OkHttp
+            """.trimIndent().replace(
+                "\n",
+                "\r\n"
+            ), // to avoid conflicts with OkHttp
             request.body.readByteString().utf8()
         )
     }

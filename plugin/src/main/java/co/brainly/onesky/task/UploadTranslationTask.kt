@@ -2,7 +2,6 @@ package co.brainly.onesky.task
 
 import co.brainly.onesky.OneSkyPluginExtension
 import co.brainly.onesky.client.OneSkyApiClient
-import co.brainly.onesky.util.Constants
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
@@ -29,14 +28,6 @@ open class UploadTranslationTask @Inject constructor(
     private val progressLogger by lazy {
         services.get(ProgressLoggerFactory::class.java)
             .newOperation("Uploading translations")
-    }
-
-    override fun getDescription(): String {
-        return "Uploads \"sourceStringFiles\" to OneSky"
-    }
-
-    override fun getGroup(): String {
-        return Constants.TASK_GROUP
     }
 
     @TaskAction
