@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="first_plural">
+        <item quantity="one">One plural</item>
+        <item quantity="few">Few plurals</item>
+    </plurals>
+
+    <plurals name="second_plural">
+        <item quantity="one">One plural - 2</item>
+        <item quantity="few">Few plurals - 2</item>
+    </plurals>
+
+    <plurals name="non_translatable_plural" translatable="false">
+        <item quantity="one">One plural - non translatable</item>
+        <item quantity="few">Few plurals - non translatable</item>
+    </plurals>
+</resources>

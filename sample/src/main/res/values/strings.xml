@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">My app\'s name</string>
+    <string name="first_string">This is first string</string>
+    <string name="second_string">This is second string</string>
+    <string name="non_translatable_string" translatable="false">This is non translatable string</string>
 </resources>
