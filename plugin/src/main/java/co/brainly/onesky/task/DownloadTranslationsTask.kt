@@ -4,6 +4,7 @@ import co.brainly.onesky.OneSkyPluginExtension
 import co.brainly.onesky.client.Language
 import co.brainly.onesky.client.LanguageListResponse
 import co.brainly.onesky.client.OneSkyApiClient
+import co.brainly.onesky.util.Constants
 import okio.buffer
 import okio.sink
 import org.gradle.api.DefaultTask
@@ -31,6 +32,14 @@ open class DownloadTranslationsTask @Inject constructor(
     private val progressLogger by lazy {
         services.get(ProgressLoggerFactory::class.java)
             .newOperation("Downloading translations")
+    }
+
+    override fun getDescription(): String {
+        return "Downloads \"sourceStringFiles\" from OneSky"
+    }
+
+    override fun getGroup(): String {
+        return Constants.TASK_GROUP
     }
 
     @TaskAction
