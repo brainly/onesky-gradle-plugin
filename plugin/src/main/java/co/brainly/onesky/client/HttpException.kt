@@ -1,7 +1,5 @@
 package co.brainly.onesky.client
 
-import okhttp3.Request
-import okio.IOException
 import java.lang.RuntimeException
 
 class HttpException(

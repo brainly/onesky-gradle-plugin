@@ -1,7 +1,6 @@
 package co.brainly.onesky.task
 
 import co.brainly.onesky.OneSkyPluginExtension
-import co.brainly.onesky.client.HttpException
 import co.brainly.onesky.client.OneSkyApiClient
 import co.brainly.onesky.util.Constants
 import org.gradle.api.DefaultTask
@@ -67,13 +66,9 @@ open class UploadTranslationTask @Inject constructor(
         logger.warn(
             "Upload failed for $filename: ${throwable.message}"
         )
-        if (throwable is HttpException) {
-            logger.warn(throwable.request.toString())
-        }
         throw TaskExecutionException(this, throwable)
     }
 
     private val Project.androidResDir: File
         get() = projectDir.resolve("src/main/res")
-
 }
