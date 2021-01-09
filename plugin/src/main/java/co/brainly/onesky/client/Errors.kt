@@ -1,10 +1,13 @@
 package co.brainly.onesky.client
 
+import okhttp3.Request
 import okio.IOException
 import java.lang.RuntimeException
 
-class NetworkException(cause: IOException) : RuntimeException(cause)
-
-class HttpException(val code: Int, val errorMessage: String) : RuntimeException(
-    "Http Code: $code - Message: $errorMessage"
+class HttpException(
+    code: Int,
+    errorMessage: String,
+    errorBody: String
+) : RuntimeException(
+    "Http Code: $code - $errorMessage\nBody: $errorBody"
 )

@@ -6,9 +6,15 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okio.ByteString.Companion.encodeUtf8
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 private val ONESKY_API_URL = "https://platform.api.onesky.io/1/".toHttpUrl()
@@ -62,6 +68,33 @@ class OneSkyApiClient(
         return fetch(request)
     }
 
+    fun uploadTranslation(projectId: Int, file: File): Result<String> {
+        val url = baseUrl.newBuilder()
+            .addPathSegment("projects")
+            .addPathSegment(projectId.toString())
+            .addPathSegment("files")
+            .addAuthParams(apiKey, apiSecret)
+            .addQueryParameter("file_format", "ANDROID_XML")
+            .addQueryParameter("is_keeping_all_strings", "true")
+            .build()
+
+        val body = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart(
+                "file",
+                file.name,
+                file.asRequestBody("application/octet-stream".toMediaTypeOrNull())
+            )
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(body)
+            .build()
+
+        return fetch(request)
+    }
+
     private inline fun <reified T> fetch(request: Request): Result<T> {
         try {
             okHttpClient.newCall(request).execute().use { response ->
@@ -74,7 +107,8 @@ class OneSkyApiClient(
                     }
                     Result.Success(data)
                 } else {
-                    Result.Failure(HttpException(response.code, response.message))
+                    val errorBody = response.body?.string() ?: ""
+                    Result.Failure(HttpException(response.code, response.message, errorBody))
                 }
             }
         } catch (e: Exception) {

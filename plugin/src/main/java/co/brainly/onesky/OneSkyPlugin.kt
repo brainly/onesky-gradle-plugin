@@ -2,6 +2,7 @@ package co.brainly.onesky
 
 import co.brainly.onesky.task.DownloadTranslationsTask
 import co.brainly.onesky.task.TranslationsProgressTask
+import co.brainly.onesky.task.UploadTranslationTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -24,5 +25,6 @@ class OneSkyPlugin : Plugin<Project> {
         val extension = extensions.create("OneSkyPluginExtension", OneSkyPluginExtension::class.java)
         tasks.register("translationsProgress", TranslationsProgressTask::class.java, extension)
         tasks.register("downloadTranslations", DownloadTranslationsTask::class.java, extension)
+        tasks.register("uploadTranslations", UploadTranslationTask::class.java, extension)
     }
 }
