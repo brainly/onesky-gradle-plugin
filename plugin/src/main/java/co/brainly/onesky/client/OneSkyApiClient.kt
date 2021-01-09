@@ -76,7 +76,7 @@ class OneSkyApiClient(
             .addQueryParameter("is_keeping_all_strings", "true")
             .build()
 
-        val body = MultipartBody.Builder()
+        val body = MultipartBody.Builder(boundary = "onesky-gradle-plugin-file")
             .setType(MultipartBody.FORM)
             .addFormDataPart(
                 "file",

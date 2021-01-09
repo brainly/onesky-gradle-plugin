@@ -5,6 +5,7 @@ import co.brainly.onesky.util.TimeProvider
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.io.File
 
 class OneSkyApiClientTest {
 
@@ -96,6 +97,40 @@ class OneSkyApiClientTest {
 
             """.trimIndent(),
             translationResult.getOrNull()
+        )
+    }
+
+    @Test
+    fun `uploads a translation file`() {
+        val file = File.createTempFile("onesky", ".tmp")
+        file.writeText("Hello OneSky Gradle Plugin")
+
+        client.uploadTranslation(projectId, file)
+
+        val request = server.takeRequest()
+
+        assertEquals(
+            "/projects/41994/files?api_key=my-api-key&timestamp=12&dev_hash=28dac32cc9ee8ab264d35087653be23e&file_format=ANDROID_XML&is_keeping_all_strings=true",
+            request.path
+        )
+
+        assertEquals(
+            "POST",
+            request.method
+        )
+
+        assertEquals(
+            """
+            --onesky-gradle-plugin-file
+            Content-Disposition: form-data; name="file"; filename="${file.name}"
+            Content-Type: application/octet-stream
+            Content-Length: 26
+
+            Hello OneSky Gradle Plugin
+            --onesky-gradle-plugin-file--
+
+            """.trimIndent().replace("\n", "\r\n"), // to avoid conflicts with OkHttp
+            request.body.readByteString().utf8()
         )
     }
 }
