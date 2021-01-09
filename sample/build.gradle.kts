@@ -25,9 +25,9 @@ android {
 }
 
 configure<OneSkyPluginExtension> {
-    apiKey = "my-api-key"
+    apiKey = "hCJXEQkNy3mRrFKnWJV1nowmjtWkJEcQ"
     apiSecret = "my-api-secret"
-    projectId = 41994
+    projectId = 378760
     sourceStringFiles = listOf("strings.xml", "plurals.xml")
 }
 
