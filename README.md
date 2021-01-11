@@ -21,7 +21,8 @@ configure<OneSkyPluginExtension> {
     apiKey = "your-api-key"
     apiSecret = "your-api-secret"
     projectId = <your_project_id>
-    // list of files to sync, e.g.: listOf("strings.xml", "plurals.xml")
+    // list of files to sync in your src/main/res/values directory, 
+    // e.g.: listOf("strings.xml", "plurals.xml")
     sourceStringFiles = emptyList()
 }
 ```
