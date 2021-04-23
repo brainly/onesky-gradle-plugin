@@ -1,5 +1,13 @@
 import co.brainly.onesky.OneSkyPluginExtension
 
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
     id("com.android.application")
     kotlin("android")
