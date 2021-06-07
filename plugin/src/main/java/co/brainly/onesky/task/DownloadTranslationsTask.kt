@@ -102,6 +102,12 @@ open class DownloadTranslationsTask @Inject constructor(
                 val (locale, region) = code.split("-")
                 return "$locale-r$region"
             }
+
+            // https://developer.android.com/reference/java/util/Locale.html#toLanguageTag()
+            if (code.contains("id")) {
+                return "in"
+            }
+
             return code
         }
 
