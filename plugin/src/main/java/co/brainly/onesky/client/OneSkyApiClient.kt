@@ -15,14 +15,14 @@ import okio.ByteString.Companion.encodeUtf8
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-private val ONESKY_API_URL = "https://platform.api.onesky.io/1/".toHttpUrl()
-
 class OneSkyApiClient(
     private val apiKey: String,
     private val apiSecret: String,
     private val timeProvider: TimeProvider = SystemTimeProvider,
-    private val baseUrl: HttpUrl = ONESKY_API_URL
+    apiUrl: String
 ) {
+
+    private val baseUrl = apiUrl.toHttpUrl()
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

@@ -4,7 +4,7 @@ import co.brainly.onesky.client.util.enqueueResponseWithJsonFile
 import co.brainly.onesky.util.TimeProvider
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.io.File
 
 class OneSkyApiClientTest {
@@ -15,7 +15,7 @@ class OneSkyApiClientTest {
     private val client = OneSkyApiClient(
         "my-api-key",
         "my-api-secret",
-        baseUrl = server.url("/"),
+        apiUrl = server.url("/").toString(),
         timeProvider = object : TimeProvider {
             override fun currentTimeMillis(): Long {
                 return 12345L

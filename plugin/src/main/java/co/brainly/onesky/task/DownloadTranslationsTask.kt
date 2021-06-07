@@ -22,16 +22,17 @@ open class DownloadTranslationsTask @Inject constructor(
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
 
-    private val client = OneSkyApiClient(
-        extension.apiKey,
-        extension.apiSecret
-    )
-
     private val logger = LoggerFactory.getLogger("downloadTranslations")
     private val progressLogger by lazy {
         services.get(ProgressLoggerFactory::class.java)
             .newOperation("Downloading translations")
     }
+
+    private val client = OneSkyApiClient(
+        apiKey = extension.apiKey,
+        apiSecret = extension.apiSecret,
+        apiUrl = extension.oneSkyApiUrl
+    )
 
     @TaskAction
     fun run() {

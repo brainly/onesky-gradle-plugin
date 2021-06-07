@@ -19,8 +19,9 @@ open class UploadTranslationTask @Inject constructor(
     private val files = extension.sourceStringFiles
 
     private val client = OneSkyApiClient(
-        extension.apiKey,
-        extension.apiSecret
+        apiKey = extension.apiKey,
+        apiSecret = extension.apiSecret,
+        apiUrl = extension.oneSkyApiUrl
     )
 
     private val logger = LoggerFactory.getLogger("uploadTranslations")

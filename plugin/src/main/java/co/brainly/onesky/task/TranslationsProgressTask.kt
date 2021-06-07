@@ -17,8 +17,9 @@ open class TranslationsProgressTask @Inject constructor(
     private val projectId = extension.projectId
 
     private val client = OneSkyApiClient(
-        extension.apiKey,
-        extension.apiSecret
+        apiKey = extension.apiKey,
+        apiSecret = extension.apiSecret,
+        apiUrl = extension.oneSkyApiUrl
     )
 
     @TaskAction
