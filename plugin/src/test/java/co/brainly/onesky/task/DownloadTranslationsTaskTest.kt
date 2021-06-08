@@ -1,11 +1,10 @@
 package co.brainly.onesky.task
 
-import co.brainly.onesky.client.util.enqueueResponseWithJsonFile
+import co.brainly.onesky.client.util.enqueueResponseWithFilesContent
 import co.brainly.onesky.util.buildFile
 import co.brainly.onesky.util.settingsFile
 import okhttp3.mockwebserver.MockWebServer
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
@@ -53,8 +52,8 @@ class DownloadTranslationsTaskTest {
             """.trimIndent()
         )
 
-        server.enqueueResponseWithJsonFile("project_languages_response_just_id.json")
-        server.enqueueResponseWithJsonFile("example_translation_file.xml")
+        server.enqueueResponseWithFilesContent("project_languages_response_just_id.json")
+        server.enqueueResponseWithFilesContent("example_translation_file.xml")
 
         GradleRunner.create()
             .withProjectDir(projectDir)

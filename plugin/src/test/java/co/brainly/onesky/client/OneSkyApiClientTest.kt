@@ -1,6 +1,6 @@
 package co.brainly.onesky.client
 
-import co.brainly.onesky.client.util.enqueueResponseWithJsonFile
+import co.brainly.onesky.client.util.enqueueResponseWithFilesContent
 import co.brainly.onesky.util.TimeProvider
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
@@ -25,7 +25,7 @@ class OneSkyApiClientTest {
 
     @Test
     fun `downloads list of project's languages`() {
-        server.enqueueResponseWithJsonFile("project_languages_response.json")
+        server.enqueueResponseWithFilesContent("project_languages_response.json")
 
         val response = client.fetchProjectLanguages(projectId)
 
@@ -76,7 +76,7 @@ class OneSkyApiClientTest {
 
     @Test
     fun `downloads a translation file`() {
-        server.enqueueResponseWithJsonFile("example_translation_file.xml")
+        server.enqueueResponseWithFilesContent("example_translation_file.xml")
 
         val language = Language("fr", "French", false, "100.0%")
         val translationResult = client.fetchTranslation(projectId, "strings.xml", language)
