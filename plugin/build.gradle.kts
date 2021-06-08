@@ -75,6 +75,13 @@ dependencies {
         because("0.5.0 crashes on Table.renderText() call")
     }
 
-    testImplementation("junit:junit:4.12")
+    testImplementation(gradleTestKit())
+    testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
+    testImplementation("org.assertj:assertj-core:3.11.1")
     testImplementation("com.squareup.okhttp3:mockwebserver:$okHttp")
+}
+
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }

@@ -22,16 +22,17 @@ open class DownloadTranslationsTask @Inject constructor(
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
 
-    private val client = OneSkyApiClient(
-        extension.apiKey,
-        extension.apiSecret
-    )
-
     private val logger = LoggerFactory.getLogger("downloadTranslations")
     private val progressLogger by lazy {
         services.get(ProgressLoggerFactory::class.java)
             .newOperation("Downloading translations")
     }
+
+    private val client = OneSkyApiClient(
+        apiKey = extension.apiKey,
+        apiSecret = extension.apiSecret,
+        apiUrl = extension.oneSkyApiUrl
+    )
 
     @TaskAction
     fun run() {
@@ -101,6 +102,12 @@ open class DownloadTranslationsTask @Inject constructor(
                 val (locale, region) = code.split("-")
                 return "$locale-r$region"
             }
+
+            // https://developer.android.com/reference/java/util/Locale.html#toLanguageTag()
+            if (code.contains("id")) {
+                return "in"
+            }
+
             return code
         }
 

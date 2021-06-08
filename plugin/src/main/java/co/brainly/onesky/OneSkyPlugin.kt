@@ -1,11 +1,13 @@
 package co.brainly.onesky
 
+import co.brainly.onesky.client.ONESKY_API_URL
 import co.brainly.onesky.task.DownloadTranslationsTask
 import co.brainly.onesky.task.TranslationsProgressTask
 import co.brainly.onesky.task.UploadTranslationTask
 import co.brainly.onesky.util.Constants
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.jetbrains.annotations.TestOnly
 
 /**
  * @property apiKey API key found on OneSky account's settings page
@@ -19,12 +21,18 @@ open class OneSkyPluginExtension(
     var apiSecret: String = "",
     var projectId: Int = -1,
     var sourceStringFiles: List<String> = emptyList()
-)
+) {
+    internal var oneSkyApiUrl: String = ONESKY_API_URL
+
+    @TestOnly
+    fun overrideOneSkyApiUrl(oneSkyApiUrl: String) {
+        this.oneSkyApiUrl = oneSkyApiUrl
+    }
+}
 
 class OneSkyPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
         val extension = extensions.create("OneSkyPluginExtension", OneSkyPluginExtension::class.java)
-
         tasks.register("translationsProgress", TranslationsProgressTask::class.java, extension)
             .configure {
                 group = Constants.TASK_GROUP

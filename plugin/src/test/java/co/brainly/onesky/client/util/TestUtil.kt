@@ -3,7 +3,7 @@ package co.brainly.onesky.client.util
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 
-fun MockWebServer.enqueueResponseWithJsonFile(resourceFilename: String) {
+fun MockWebServer.enqueueResponseWithFilesContent(resourceFilename: String) {
     val content = javaClass.getResource("/$resourceFilename")
         .readText()
 
