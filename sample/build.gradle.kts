@@ -11,7 +11,7 @@ buildscript {
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("co.brainly.onesky") version "1.0.0"
+    id("co.brainly.onesky") version "1.1.0"
 }
 
 android {

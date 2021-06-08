@@ -4,7 +4,7 @@ Plugin for downloading and uploading translations from <a href="https://www.ones
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-1.0.0-blue.svg">
+    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg">
 </p>
 
 ## Installation
