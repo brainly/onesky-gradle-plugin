@@ -15,6 +15,8 @@ import okio.ByteString.Companion.encodeUtf8
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+internal const val ONESKY_API_URL = "https://platform.api.onesky.io/1/"
+
 class OneSkyApiClient(
     private val apiKey: String,
     private val apiSecret: String,

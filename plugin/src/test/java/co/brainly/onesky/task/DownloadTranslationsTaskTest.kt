@@ -46,7 +46,7 @@ class DownloadTranslationsTaskTest {
                     apiSecret = "???"
                     projectId = 378760
                     sourceStringFiles = listOf("strings.xml")
-                    oneSkyApiUrl = "${server.url("/")}"
+                    overrideOneSkyApiUrl("${server.url("/")}")
                 }
                   
             """.trimIndent()

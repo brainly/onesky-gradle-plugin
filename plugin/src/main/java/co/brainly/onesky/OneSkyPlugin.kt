@@ -1,5 +1,6 @@
 package co.brainly.onesky
 
+import co.brainly.onesky.client.ONESKY_API_URL
 import co.brainly.onesky.task.DownloadTranslationsTask
 import co.brainly.onesky.task.TranslationsProgressTask
 import co.brainly.onesky.task.UploadTranslationTask
@@ -13,16 +14,21 @@ import org.jetbrains.annotations.TestOnly
  * @property apiSecret API secret found on OneSky account's settings page
  * @property projectId OneSky's project id for syncing files with
  * @property sourceStringFiles list of files to be synced with OneSky
- * @property oneSkyApiUrl OneSky's API url, exposed only for tests, do not modify
  */
 open class OneSkyPluginExtension(
     var verbose: Boolean = false,
     var apiKey: String = "",
     var apiSecret: String = "",
     var projectId: Int = -1,
-    var sourceStringFiles: List<String> = emptyList(),
-    var oneSkyApiUrl: String = "https://platform.api.onesky.io/1/"
-)
+    var sourceStringFiles: List<String> = emptyList()
+) {
+    internal var oneSkyApiUrl: String = ONESKY_API_URL
+
+    @TestOnly
+    fun overrideOneSkyApiUrl(oneSkyApiUrl: String) {
+        this.oneSkyApiUrl = oneSkyApiUrl
+    }
+}
 
 class OneSkyPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
