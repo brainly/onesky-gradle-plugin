@@ -24,7 +24,7 @@ class DownloadTranslationsTaskTest {
                 include ":my-module"
             """.trimIndent()
         )
-
+        val serverUrl = server.url("/")
         moduleDir.buildFile().writeText(
             """
                 import co.brainly.onesky.OneSkyPluginExtension
@@ -46,7 +46,7 @@ class DownloadTranslationsTaskTest {
                     apiSecret = "???"
                     projectId = 378760
                     sourceStringFiles = listOf("strings.xml")
-                    overrideOneSkyApiUrl("${server.url("/")}")
+                    overrideOneSkyApiUrl("$serverUrl")
                 }
                   
             """.trimIndent()
