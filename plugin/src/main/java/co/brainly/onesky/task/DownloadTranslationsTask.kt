@@ -4,6 +4,7 @@ import co.brainly.onesky.OneSkyPluginExtension
 import co.brainly.onesky.client.Language
 import co.brainly.onesky.client.LanguageListResponse
 import co.brainly.onesky.client.OneSkyApiClient
+import co.brainly.onesky.client.isSuccessful
 import okio.buffer
 import okio.sink
 import org.gradle.api.DefaultTask
@@ -60,7 +61,7 @@ open class DownloadTranslationsTask @Inject constructor(
                 val translation = client.fetchTranslation(projectId, filename, language)
                 translation.handle(
                     onSuccess = { saveTranslation(language, filename, it) },
-                    onFailure = { reportTranslationFailure(language, filename, it) }
+                    onFailure = { reportTranslationFetchFailure(language, filename, it) }
                 )
             }
         }
@@ -81,7 +82,7 @@ open class DownloadTranslationsTask @Inject constructor(
         }
     }
 
-    private fun reportTranslationFailure(
+    private fun reportTranslationFetchFailure(
         language: Language,
         filename: String,
         throwable: Throwable

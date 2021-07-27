@@ -1,5 +1,7 @@
 package co.brainly.onesky.client
 
+import kotlin.contracts.contract
+
 sealed class Result<T> {
     class Success<T>(val value: T) : Result<T>()
     class Failure<T>(val throwable: Throwable) : Result<T>()
@@ -21,4 +23,5 @@ sealed class Result<T> {
         is Failure -> throwable
         is Success -> null
     }
+
 }
