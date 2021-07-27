@@ -81,7 +81,6 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver:$okHttp")
 }
 
-
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
