@@ -21,6 +21,7 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
+    private val sourcePath = extension.sourcePath
 
     private val logger = LoggerFactory.getLogger("downloadTranslations")
     private val progressLogger by lazy {
@@ -112,5 +113,5 @@ open class DownloadTranslationsTask @Inject constructor(
         }
 
     private val Project.androidResDir: File
-        get() = projectDir.resolve("src/main/res")
+        get() = projectDir.resolve(sourcePath)
 }
