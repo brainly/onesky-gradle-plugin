@@ -44,7 +44,7 @@ open class UploadTranslationTask @Inject constructor(
 
             logger.warn(baseTranslationFile.absolutePath)
 
-            val result = client.uploadTranslation(projectId, baseTranslationFile)
+            val result = client.uploadTranslation(projectId, baseTranslationFile, deprecateStrings = false)
             result.handle(
                 onSuccess = { /*do nothing*/ },
                 onFailure = { error -> onUploadFailure(filename, error) }
