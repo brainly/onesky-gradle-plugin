@@ -35,6 +35,12 @@ configure<OneSkyPluginExtension> {
 | **downloadTranslations** | Downloads all of available translations (including not finished ones) |
 | **uploadTranslations**  | Uploads base translation files |
 
+Add `-Pdeprecate-strings` if you would like to deprecate strings on OneSky which are not present in `sourceStringFiles`.
+
+```bash
+# deprecates removed strings on OneSky
+./gradlew sample:uploadTranslations -Pdeprecate-strings
+```
 ## Releasing
 
 See the release instructions [here](HOW_TO_RELEASE.md).
