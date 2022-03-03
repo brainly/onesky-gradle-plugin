@@ -4,7 +4,7 @@ Plugin for downloading and uploading translations from <a href="https://www.ones
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg">
+    <img src="https://img.shields.io/badge/version-1.2.0-blue.svg">
 </p>
 
 ## Installation
@@ -12,7 +12,7 @@ Plugin for downloading and uploading translations from <a href="https://www.ones
 **app/build.gradle.kts**
 ```kotlin
 plugins {
-    id("co.brainly.onesky") version "1.1.0"
+    id("co.brainly.onesky") version "1.2.0"
 }
 
 // ...
@@ -46,7 +46,7 @@ See the release instructions [here](HOW_TO_RELEASE.md).
 ./gradlew clean plugin:build plugin:publishToMavenLocal
 
 # run a sample
-./gradlew sample:translationsProgress --refresh-dependencies
+./gradlew sample:translationsProgress
 ```
 
 ## License
