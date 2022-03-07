@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import javax.inject.Inject
 
+const val DEPRECATE_STRINGS_FLAG = "deprecate-strings"
+
 open class UploadTranslationTask @Inject constructor(
-    extension: OneSkyPluginExtension
+    extension: OneSkyPluginExtension,
+    private val deprecateStrings: Boolean
 ) : DefaultTask() {
 
     private val projectId = extension.projectId
@@ -36,6 +39,10 @@ open class UploadTranslationTask @Inject constructor(
     fun run() {
         progressLogger.start("Uploading translations", "")
 
+        if (deprecateStrings) {
+            logger.warn("Deprecating strings on OneSky which are not found in base files.")
+        }
+
         files.forEachIndexed { index, filename ->
             progressLogger.progress(
                 "$filename (${index + 1}/${files.size})"
@@ -45,7 +52,11 @@ open class UploadTranslationTask @Inject constructor(
 
             logger.warn(baseTranslationFile.absolutePath)
 
-            val result = client.uploadTranslation(projectId, baseTranslationFile)
+            val result = client.uploadTranslation(
+                projectId,
+                baseTranslationFile,
+                deprecateStrings = deprecateStrings
+            )
             result.handle(
                 onSuccess = { /*do nothing*/ },
                 onFailure = { error -> onUploadFailure(filename, error) }

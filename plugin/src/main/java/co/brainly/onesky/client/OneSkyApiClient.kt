@@ -68,14 +68,20 @@ class OneSkyApiClient(
         return fetch(request)
     }
 
-    fun uploadTranslation(projectId: Int, file: File): Result<String> {
+    fun uploadTranslation(projectId: Int, file: File, deprecateStrings: Boolean): Result<String> {
+        val isKeepingAllStrings = if (deprecateStrings) {
+            "false"
+        } else {
+            "true"
+        }
+
         val url = baseUrl.newBuilder()
             .addPathSegment("projects")
             .addPathSegment(projectId.toString())
             .addPathSegment("files")
             .addAuthParams(apiKey, apiSecret)
             .addQueryParameter("file_format", "ANDROID_XML")
-            .addQueryParameter("is_keeping_all_strings", "true")
+            .addQueryParameter("is_keeping_all_strings", isKeepingAllStrings)
             .build()
 
         val body = MultipartBody.Builder(boundary = "onesky-gradle-plugin-file")

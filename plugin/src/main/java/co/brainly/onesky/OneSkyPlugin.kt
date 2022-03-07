@@ -1,6 +1,7 @@
 package co.brainly.onesky
 
 import co.brainly.onesky.client.ONESKY_API_URL
+import co.brainly.onesky.task.DEPRECATE_STRINGS_FLAG
 import co.brainly.onesky.task.DownloadTranslationsTask
 import co.brainly.onesky.task.TranslationsProgressTask
 import co.brainly.onesky.task.UploadTranslationTask
@@ -46,7 +47,8 @@ class OneSkyPlugin : Plugin<Project> {
                 description = "Displays current progress from OneSky, skips already finished translations"
             }
 
-        tasks.register("uploadTranslations", UploadTranslationTask::class.java, extension)
+        val deprecateStrings = project.hasProperty(DEPRECATE_STRINGS_FLAG)
+        tasks.register("uploadTranslations", UploadTranslationTask::class.java, extension, deprecateStrings)
             .configure {
                 group = Constants.TASK_GROUP
                 description = "Uploads base \"sourceStringFiles\" to OneSky"
