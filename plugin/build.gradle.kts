@@ -10,7 +10,7 @@ plugins {
 apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
 group = "co.brainly"
-version = "1.3.0"
+version = "1.4.0-SNAPSHOT"
 
 gradlePlugin {
     plugins {
