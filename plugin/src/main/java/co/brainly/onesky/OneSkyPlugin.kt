@@ -21,7 +21,8 @@ open class OneSkyPluginExtension(
     var apiKey: String = "",
     var apiSecret: String = "",
     var projectId: Int = -1,
-    var sourceStringFiles: List<String> = emptyList()
+    var sourceStringFiles: List<String> = emptyList(),
+    var sourcePath: String = "src/main/res"
 ) {
     internal var oneSkyApiUrl: String = ONESKY_API_URL
 
