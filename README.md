@@ -24,6 +24,9 @@ configure<OneSkyPluginExtension> {
     // list of files to sync in your src/main/res/values directory, 
     // e.g.: listOf("strings.xml", "plurals.xml")
     sourceStringFiles = emptyList()
+    sourcePath = "path-to-your-string-values-directory"
+    // has src/main/res/ as a default value,
+    // can be overriden with your custom path (optional)
 }
 ```
 
