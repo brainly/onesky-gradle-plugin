@@ -57,6 +57,9 @@ See the release instructions [here](HOW_TO_RELEASE.md).
 ## Development
 
 ```bash
+# run tests
+./gradlew test
+
 # publish locally
 ./gradlew clean plugin:build plugin:publishToMavenLocal
 
