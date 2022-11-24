@@ -50,14 +50,25 @@ class OneSkyApiClient(
         return fetch(request)
     }
 
-    fun fetchTranslation(projectId: Int, sourceFile: String, language: Language): Result<String> {
+    fun fetchTranslation(
+        projectId: Int,
+        sourceFile: String,
+        language: Language,
+        fileNamePrefix: String? = null
+    ): Result<String> {
+        val sourceFileName = if (fileNamePrefix != null) {
+            "$fileNamePrefix-$sourceFile"
+        } else {
+            sourceFile
+        }
+
         val url = baseUrl.newBuilder()
             .addPathSegment("projects")
             .addPathSegment(projectId.toString())
             .addPathSegment("translations")
             .addAuthParams(apiKey, apiSecret)
             .addQueryParameter("locale", language.code)
-            .addQueryParameter("source_file_name", sourceFile)
+            .addQueryParameter("source_file_name", sourceFileName)
             .build()
 
         val request = Request.Builder()
@@ -68,7 +79,12 @@ class OneSkyApiClient(
         return fetch(request)
     }
 
-    fun uploadTranslation(projectId: Int, file: File, deprecateStrings: Boolean): Result<String> {
+    fun uploadTranslation(
+        projectId: Int,
+        file: File,
+        deprecateStrings: Boolean,
+        fileNamePrefix: String? = null
+    ): Result<String> {
         val isKeepingAllStrings = if (deprecateStrings) {
             "false"
         } else {
@@ -84,9 +100,14 @@ class OneSkyApiClient(
             .addQueryParameter("is_keeping_all_strings", isKeepingAllStrings)
             .build()
 
+        val fileName = if (fileNamePrefix != null) {
+            "$fileNamePrefix-${file.name}"
+        } else {
+            file.name
+        }
         val body = MultipartBody.Builder(boundary = "onesky-gradle-plugin-file")
             .setType(MultipartBody.FORM)
-            .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaTypeOrNull()))
+            .addFormDataPart("file", fileName, file.asRequestBody("application/octet-stream".toMediaTypeOrNull()))
             .build()
 
         val request = Request.Builder()

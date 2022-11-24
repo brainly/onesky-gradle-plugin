@@ -31,6 +31,11 @@ configure<OneSkyPluginExtension> {
     // has src/main/res/ as a default value,    
     // can be overriden with your custom path (optional)
     sourcePath = "path-to-your-string-values-directory"
+    
+    // prefix set for translation files located in different Gradle modules
+    // which share the same OneSky project
+    // (optional, required for multi-module support)
+    moduleName = "avatar-picker"
 
     // Determines if the plugin should download & replace the base language or not.
     // defaults to false
@@ -40,11 +45,11 @@ configure<OneSkyPluginExtension> {
 
 ## Features
 
-| Task                 | Description                                                              |
-|----------------------|--------------------------------------------------------------------------|
+| Task                     | Description                                                           |
+|--------------------------|-----------------------------------------------------------------------|
 | **translationsProgress** | Displays translations progress for all languages                      |
 | **downloadTranslations** | Downloads all of available translations (including not finished ones) |
-| **uploadTranslations**  | Uploads base translation files |
+| **uploadTranslations**   | Uploads base translation files                                        |
 
 Add `-Pdeprecate-strings` if you would like to deprecate strings on OneSky which are not present in `sourceStringFiles`.
 
@@ -52,6 +57,29 @@ Add `-Pdeprecate-strings` if you would like to deprecate strings on OneSky which
 # deprecates removed strings on OneSky
 ./gradlew sample:uploadTranslations -Pdeprecate-strings
 ```
+
+### Multi-module support
+
+If you have a multi-module project and would like to:
+- use single OneSky project for all of them
+- AND keep translation files in their respective modules
+
+your choice is to either:
+- name every `strings.xml` file differently for every module, which seems tedious
+- OR use `moduleName` property in `OneSkyPluginExtension`
+
+`moduleName` property will automatically prefix your string files so they do not overlap on OneSky.
+
+Example:
+```kotlin
+// project-dir/my-feature-module/build.gradle.kts
+
+configure<OneSkyPluginExtension> {
+    moduleName = "my-feature"
+}
+```
+will result in uploading `my-feature-strings.xml` to OneSky, so on next sync, `my-feature-strings.xml` will be downloaded, containing only translations for a given module.
+
 ## Releasing
 
 See the release instructions [here](HOW_TO_RELEASE.md).
