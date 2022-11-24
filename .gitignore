@@ -39,9 +39,6 @@ proguard/
 
 *.iml
 
-#local gradle properties
-gradle.properties
-
 #captures from Android Studio (heap dumps, view hierarchy)
 captures/
 
