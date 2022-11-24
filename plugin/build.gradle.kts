@@ -10,7 +10,7 @@ plugins {
 apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
 group = "co.brainly"
-version = "1.5.0-SNAPSHOT"
+version = "1.5.0"
 
 pluginBundle {
     website = "https://brainly.com"
