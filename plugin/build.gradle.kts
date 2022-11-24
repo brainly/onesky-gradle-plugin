@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     `kotlin-dsl`
-    id("com.gradle.plugin-publish") version "0.12.0"
+    id("com.gradle.plugin-publish") version "1.1.0"
     `maven-publish`
 }
 
@@ -12,9 +12,16 @@ apply(plugin = "org.jlleitschuh.gradle.ktlint")
 group = "co.brainly"
 version = "1.5.0-SNAPSHOT"
 
+pluginBundle {
+    website = "https://brainly.com"
+    vcsUrl = "https://github.com/brainly/onesky-gradle-plugin"
+    description = "Sync your translations files with OneSky"
+    tags = listOf("android", "onesky", "localization")
+}
+
 gradlePlugin {
     plugins {
-        register("onesky-gradle") {
+        register( "onesky-gradle") {
             id = "co.brainly.onesky"
             displayName = "OneSky Gradle Plugin"
             implementationClass = "co.brainly.onesky.OneSkyPlugin"
@@ -22,22 +29,9 @@ gradlePlugin {
     }
 }
 
-pluginBundle {
-    website = "https://brainly.com"
-    vcsUrl = "https://github.com/brainly/onesky-gradle-plugin"
-    description = "Sync your translations files with OneSky"
-    tags = listOf("android", "onesky", "localization")
-
-    (plugins) {
-        "onesky-gradle" {
-            displayName = "OneSky Gradle Plugin"
-        }
-    }
-}
-
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        languageVersion = "1.4"
+        languageVersion = "1.7"
         freeCompilerArgs = freeCompilerArgs + listOf("-Xopt-in=kotlin.contracts.ExperimentalContracts")
     }
 }
@@ -59,7 +53,7 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

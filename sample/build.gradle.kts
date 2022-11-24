@@ -11,15 +11,15 @@ buildscript {
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("co.brainly.onesky") version "1.2.0"
+    id("co.brainly.onesky") version "1.4.0"
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdk = 33
     defaultConfig {
         applicationId = "co.brainly.sample"
-        minSdkVersion(21)
-        targetSdkVersion(28)
+        minSdk = 21
+        targetSdk = 28
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -40,12 +40,10 @@ configure<OneSkyPluginExtension> {
 }
 
 dependencies {
-    implementation(fileTree("libs").matching { include("*.jar") })
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50")
-    implementation("androidx.appcompat:appcompat:1.0.2")
-    implementation("androidx.core:core-ktx:1.0.1")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-    implementation("com.squareup.leakcanary:leakcanary-android:1.6.3")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test:runner:1.1.1")
