@@ -31,7 +31,7 @@ gradlePlugin {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        languageVersion = "1.4"
+        languageVersion = "1.7"
         freeCompilerArgs = freeCompilerArgs + listOf("-Xopt-in=kotlin.contracts.ExperimentalContracts")
     }
 }
@@ -53,7 +53,7 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
