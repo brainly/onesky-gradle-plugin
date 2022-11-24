@@ -29,6 +29,10 @@ configure<OneSkyPluginExtension> {
     // has src/main/res/ as a default value,    
     // can be overriden with your custom path (optional)
     sourcePath = "path-to-your-string-values-directory"
+
+    // Determines if the plugin should download & replace the base language or not.
+    // defaults to false
+    downloadBaseLanguage = false
 }
 ```
 

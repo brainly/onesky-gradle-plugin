@@ -22,6 +22,7 @@ open class DownloadTranslationsTask @Inject constructor(
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
     private val sourcePath = extension.sourcePath
+    private val downloadBaseLanguage = extension.downloadBaseLanguage
 
     private val logger = LoggerFactory.getLogger("downloadTranslations")
     private val progressLogger by lazy {
@@ -50,7 +51,7 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private fun downloadLanguages(languageListResponse: LanguageListResponse) {
         val languages = languageListResponse.data
-            .filter { !it.is_base_language }
+            .filter { downloadBaseLanguage || !it.is_base_language }
 
         val totalFiles = languages.size * files.size
         languages.forEachIndexed { languageIndex, language ->
@@ -73,7 +74,7 @@ open class DownloadTranslationsTask @Inject constructor(
             return
         }
 
-        val languageDir = project.androidResDir.resolve("values-${language.androidDirName}")
+        val languageDir = project.androidResDir.resolve(language.androidDirName)
         languageDir.mkdirs()
 
         val translationFile = File(languageDir, filename)
@@ -99,17 +100,16 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private val Language.androidDirName: String
         get() {
-            if (code.contains("-")) {
-                val (locale, region) = code.split("-")
-                return "$locale-r$region"
+            return when {
+                downloadBaseLanguage && is_base_language -> "values"
+                code.contains("-") -> {
+                    val (locale, region) = code.split("-")
+                    "values-$locale-r$region"
+                }
+                // https://developer.android.com/reference/java/util/Locale.html#toLanguageTag()
+                code == "id" -> "values-in"
+                else -> "values-$code"
             }
-
-            // https://developer.android.com/reference/java/util/Locale.html#toLanguageTag()
-            if (code.contains("id")) {
-                return "in"
-            }
-
-            return code
         }
 
     private val Project.androidResDir: File

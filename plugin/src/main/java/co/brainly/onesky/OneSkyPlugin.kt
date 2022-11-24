@@ -15,6 +15,7 @@ import org.jetbrains.annotations.TestOnly
  * @property apiSecret API secret found on OneSky account's settings page
  * @property projectId OneSky's project id for syncing files with
  * @property sourceStringFiles list of files to be synced with OneSky
+ * @property downloadBaseLanguage Determines if the plugin should download & replace the base language or not
  */
 open class OneSkyPluginExtension(
     var verbose: Boolean = false,
@@ -22,7 +23,8 @@ open class OneSkyPluginExtension(
     var apiSecret: String = "",
     var projectId: Int = -1,
     var sourceStringFiles: List<String> = emptyList(),
-    var sourcePath: String = "src/main/res"
+    var sourcePath: String = "src/main/res",
+    var downloadBaseLanguage: Boolean = false
 ) {
     internal var oneSkyApiUrl: String = ONESKY_API_URL
 
