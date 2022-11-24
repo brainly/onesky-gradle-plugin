@@ -76,7 +76,7 @@ configure<OneSkyPluginExtension> {
     moduleName = "my-feature"
 }
 ```
-will result in uploading `my-feature-strings.xml` to OneSky, so on next sync, my-feature-strings.xml will be downloaded, containing only translations for a given module.
+will result in uploading `my-feature-strings.xml` to OneSky, so on next sync, `my-feature-strings.xml` will be downloaded, containing only translations for a given module.
 
 ## Releasing
 
