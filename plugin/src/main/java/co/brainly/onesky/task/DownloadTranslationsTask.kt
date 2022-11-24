@@ -23,6 +23,7 @@ open class DownloadTranslationsTask @Inject constructor(
     private val files = extension.sourceStringFiles
     private val sourcePath = extension.sourcePath
     private val downloadBaseLanguage = extension.downloadBaseLanguage
+    private val moduleName = extension.moduleName
 
     private val logger = LoggerFactory.getLogger("downloadTranslations")
     private val progressLogger by lazy {
@@ -59,7 +60,7 @@ open class DownloadTranslationsTask @Inject constructor(
                 progressLogger.progress(
                     "${language.code}: $filename (${languageIndex * files.size + fileIndex}/$totalFiles)"
                 )
-                val translation = client.fetchTranslation(projectId, filename, language)
+                val translation = client.fetchTranslation(projectId, filename, language, fileNamePrefix = moduleName)
                 translation.handle(
                     onSuccess = { saveTranslation(language, filename, it) },
                     onFailure = { reportTranslationFailure(language, filename, it) }

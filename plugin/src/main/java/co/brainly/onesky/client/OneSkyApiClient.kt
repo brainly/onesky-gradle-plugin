@@ -50,14 +50,25 @@ class OneSkyApiClient(
         return fetch(request)
     }
 
-    fun fetchTranslation(projectId: Int, sourceFile: String, language: Language): Result<String> {
+    fun fetchTranslation(
+        projectId: Int,
+        sourceFile: String,
+        language: Language,
+        fileNamePrefix: String? = null
+    ): Result<String> {
+        val sourceFileName = if (fileNamePrefix != null) {
+            "$fileNamePrefix-$sourceFile"
+        } else {
+            sourceFile
+        }
+
         val url = baseUrl.newBuilder()
             .addPathSegment("projects")
             .addPathSegment(projectId.toString())
             .addPathSegment("translations")
             .addAuthParams(apiKey, apiSecret)
             .addQueryParameter("locale", language.code)
-            .addQueryParameter("source_file_name", sourceFile)
+            .addQueryParameter("source_file_name", sourceFileName)
             .build()
 
         val request = Request.Builder()

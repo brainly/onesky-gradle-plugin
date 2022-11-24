@@ -46,12 +46,10 @@ open class UploadTranslationTask @Inject constructor(
 
         files.forEachIndexed { index, filename ->
             progressLogger.progress(
-                "$filename (${index + 1}/${files.size})"
+                "${moduleName?.let { "($it) " } ?: ""}$filename (${index + 1}/${files.size})"
             )
             val valuesDir = project.androidResDir.resolve("values")
             val baseTranslationFile = File(valuesDir, filename)
-
-            logger.warn(baseTranslationFile.absolutePath)
 
             val result = client.uploadTranslation(
                 projectId,
