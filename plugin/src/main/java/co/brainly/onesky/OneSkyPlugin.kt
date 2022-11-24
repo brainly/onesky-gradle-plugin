@@ -16,6 +16,7 @@ import org.jetbrains.annotations.TestOnly
  * @property projectId OneSky's project id for syncing files with
  * @property sourceStringFiles list of files to be synced with OneSky
  * @property downloadBaseLanguage Determines if the plugin should download & replace the base language or not
+ * @property moduleName appends a prefix to all [sourceStringFiles] for multi-module support, use null to disable
  */
 open class OneSkyPluginExtension(
     var verbose: Boolean = false,
@@ -24,7 +25,8 @@ open class OneSkyPluginExtension(
     var projectId: Int = -1,
     var sourceStringFiles: List<String> = emptyList(),
     var sourcePath: String = "src/main/res",
-    var downloadBaseLanguage: Boolean = false
+    var downloadBaseLanguage: Boolean = false,
+    var moduleName: String? = null
 ) {
     internal var oneSkyApiUrl: String = ONESKY_API_URL
 
