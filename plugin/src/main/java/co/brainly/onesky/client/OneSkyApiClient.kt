@@ -86,11 +86,7 @@ class OneSkyApiClient(
 
         val body = MultipartBody.Builder(boundary = "onesky-gradle-plugin-file")
             .setType(MultipartBody.FORM)
-            .addFormDataPart(
-                "file",
-                file.name,
-                file.asRequestBody("application/octet-stream".toMediaTypeOrNull())
-            )
+            .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaTypeOrNull()))
             .build()
 
         val request = Request.Builder()

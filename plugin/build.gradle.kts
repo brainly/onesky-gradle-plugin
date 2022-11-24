@@ -21,7 +21,7 @@ pluginBundle {
 
 gradlePlugin {
     plugins {
-        register( "onesky-gradle") {
+        register("onesky-gradle") {
             id = "co.brainly.onesky"
             displayName = "OneSky Gradle Plugin"
             implementationClass = "co.brainly.onesky.OneSkyPlugin"
