@@ -21,6 +21,7 @@ open class UploadTranslationTask @Inject constructor(
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
     private val sourcePath = extension.sourcePath
+    private val moduleName = extension.moduleName
 
     private val client = OneSkyApiClient(
         apiKey = extension.apiKey,
@@ -55,7 +56,8 @@ open class UploadTranslationTask @Inject constructor(
             val result = client.uploadTranslation(
                 projectId,
                 baseTranslationFile,
-                deprecateStrings = deprecateStrings
+                deprecateStrings = deprecateStrings,
+                fileNamePrefix = moduleName
             )
             result.handle(
                 onSuccess = { /*do nothing*/ },
