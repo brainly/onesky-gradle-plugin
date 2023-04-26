@@ -60,11 +60,20 @@ open class DownloadTranslationsTask @Inject constructor(
                 progressLogger.progress(
                     "${language.code}: $filename (${languageIndex * files.size + fileIndex}/$totalFiles)"
                 )
-                val translation = client.fetchTranslation(projectId, filename, language, fileNamePrefix = moduleName)
-                translation.handle(
+                client.fetchTranslation(projectId, filename, language, fileNamePrefix = moduleName).handle(
                     onSuccess = { saveTranslation(language, filename, it) },
                     onFailure = { reportTranslationFailure(language, filename, it) }
                 )
+                // According to
+                // https://support.oneskyapp.com/hc/en-us/articles/206887797-How-to-find-your-API-keys-
+                //
+                // We are not suppose to do more than 3 requests per second or more than 60 requests per minute
+                // in this case the slowest we can go is one request per second, so we need a delay, considering the fact
+                // that requesting will have it's own slight delay 1 second delay should be more that enough
+                //
+                // The perfect way would be to do request in perfect 1000 ms intervals, coroutines would be nicer for
+                // that but let's start with that prove of concept
+                Thread.sleep(1000L)
             }
         }
     }
