@@ -22,6 +22,7 @@ open class DownloadTranslationsTask @Inject constructor(
     private val projectId = extension.projectId
     private val files = extension.sourceStringFiles
     private val sourcePath = extension.sourcePath
+    private val downloadLanguages = extension.downloadLanguages
     private val downloadBaseLanguage = extension.downloadBaseLanguage
     private val moduleName = extension.moduleName
 
@@ -52,6 +53,7 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private fun downloadLanguages(languageListResponse: LanguageListResponse) {
         val languages = languageListResponse.data
+            .filter { downloadLanguages.isEmpty() || it.code in downloadLanguages }
             .filter { downloadBaseLanguage || !it.is_base_language }
 
         val totalFiles = languages.size * files.size
